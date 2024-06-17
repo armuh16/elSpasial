@@ -1,0 +1,256 @@
+definitions:
+  dto.AcceptOrderRequest:
+    description: Request body for accepting an order
+    properties:
+      transaction_id:
+        example: 1
+        type: integer
+    type: object
+  dto.CreateOrderRequest:
+    type: object
+  dto.LoginRequest:
+    description: Request body for user login
+    properties:
+      email:
+        example: john.doe@example.com
+        type: string
+      password:
+        example: secret
+        type: string
+    type: object
+  dto.RegisterRequest:
+    description: Request body for user registration
+    properties:
+      address:
+        example: 123 Main St
+        type: string
+      email:
+        example: john.doe@example.com
+        type: string
+      name:
+        example: John Doe
+        type: string
+      password:
+        example: secret
+        type: string
+      role_id:
+        allOf:
+        - $ref: '#/definitions/enum.RoleType'
+        example: 2
+    type: object
+  enum.RoleType:
+    enum:
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - RoleTypeDriver
+    - RoleTypeUser
+  github_com_elspasial_module_trip_dto.CreateRequest:
+    description: Request body for creating a trip
+    properties:
+      destination:
+        example: City B
+        type: string
+      origin:
+        example: City A
+        type: string
+      price:
+        example: 100
+        type: number
+    type: object
+  utilities.ResponseRequest:
+    properties:
+      code:
+        type: integer
+      data: {}
+      error: {}
+      status:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /v1/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: User login
+      parameters:
+      - description: Login Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+      summary: User login
+      tags:
+      - Auth
+  /v1/auth/register:
+    post:
+      consumes:
+      - application/json
+      description: User registration
+      parameters:
+      - description: Register Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+      summary: User registration
+      tags:
+      - Auth
+  /v1/orders:
+    get:
+      consumes:
+      - application/json
+      description: Get all orders for the authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+      security:
+      - Bearer: []
+      summary: Get all orders
+      tags:
+      - Orders
+    post:
+      consumes:
+      - application/json
+      description: Create a new order
+      parameters:
+      - description: Create Order Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOrderRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+      security:
+      - Bearer: []
+      summary: Create a new order
+      tags:
+      - Orders
+  /v1/orders/accept:
+    post:
+      consumes:
+      - application/json
+      description: Accept an order
+      parameters:
+      - description: Accept Order Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AcceptOrderRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+      security:
+      - Bearer: []
+      summary: Accept an order
+      tags:
+      - Orders
+  /v1/trip:
+    get:
+      consumes:
+      - application/json
+      description: Get all trips for the authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+      security:
+      - Bearer: []
+      summary: Get all trips
+      tags:
+      - Trips
+    post:
+      consumes:
+      - application/json
+      description: Create a new trip
+      parameters:
+      - description: Create Trip Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_elspasial_module_trip_dto.CreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utilities.ResponseRequest'
+      security:
+      - Bearer: []
+      summary: Create a new trip
+      tags:
+      - Trips
+securityDefinitions:
+  Bearer:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
