@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "3ebcf8ee-ffcc-42b9-bec7-2e1d90ae046e",
+		"name": "Elspasial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17728921"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Email\":\"user@gmail.com\",\n    \"Password\":\"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/v1/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Driver",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Email\":\"driver@gmail.com\",\n    \"Password\":\"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/v1/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"driver1\",\n    \"Email\": \"driver1@gmail.com\",\n    \"Password\": \"1234567890\",\n    \"Adress\": \"Jakarta\",\n    \"RoleID\": 1 // Role 1 Driver, Role 2 User\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/v1/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trip",
+			"item": [
+				{
+					"name": "List Trip User [NEED TOKEN USER AND TOKEN DRIVER]",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjcsInV1aWQiOiI4MzhiZTM4Yy00NjVjLTRhYmYtYTc4Ni03ODViNmVkOGExY2QifSwiZXhwIjoxNzE4NDcyNTk4LCJpYXQiOjE3MTgyMTMzOTh9.C5WFd1syRwpWpRl6u8ffkOM_cuS0daUtOkg_PeW3Hh4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "localhost:8081/v1/trip",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"trip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Trip User [NEED TOKEN USER]",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjcsInV1aWQiOiI4MzhiZTM4Yy00NjVjLTRhYmYtYTc4Ni03ODViNmVkOGExY2QifSwiZXhwIjoxNzE4NDcyNTk4LCJpYXQiOjE3MTgyMTMzOTh9.C5WFd1syRwpWpRl6u8ffkOM_cuS0daUtOkg_PeW3Hh4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Origin\":\"Jakarta\",\n    \"Destination\":\"Bandung\",\n    \"Price\": 200000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/v1/trip",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"trip"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Create Orders User [NEED TOKEN USER]",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjcsInV1aWQiOiI4MzhiZTM4Yy00NjVjLTRhYmYtYTc4Ni03ODViNmVkOGExY2QifSwiZXhwIjoxNzE4NDcyNTk4LCJpYXQiOjE3MTgyMTMzOTh9.C5WFd1syRwpWpRl6u8ffkOM_cuS0daUtOkg_PeW3Hh4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Trip\":[2] // ID order transaction\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/v1/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Order User [NEED TOKEN DRIVER]",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjYsInV1aWQiOiIzZDlkMTcxYS0wOTNlLTRlNTAtOGYyMi1iYjExZTkxMzQ0NGMifSwiZXhwIjoxNzE4NDI5ODMzLCJpYXQiOjE3MTgxNzA2MzN9.RUfdwtb7H6xztZHZyZAg894wqA9zOzH51CT9VbdcpUg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/v1/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept Order User [NEED TOKEN DRIVER]",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJfaWQiOjksInV1aWQiOiJjYmE5MmFhZS1jNzM2LTRkNGYtODEzNi0yMDMxNWU0Yjc0MjUifSwiZXhwIjoxNzE4NjA0NTQ4LCJpYXQiOjE3MTgzNDUzNDh9.Mu07gW9LrRnOfi2wLvmESoaBvHWsLKnRy0AHZ2bY92s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"TransactionID\":3 // TransactionID \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/v1/orders/accept",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"orders",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
